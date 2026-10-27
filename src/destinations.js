@@ -1,8 +1,8 @@
 const entries=[
  ['COSENZA','Calabria'],['CATANZARO','Calabria'],['REGGIO CALABRIA','Calabria'],
- ['HB2 FLY','FLY'],['HB2 COY','COY'],['HP3 FLY','FLY'],['HP3 COY','COY'],
- ['HM4 FLY','FLY'],['HM4 COY','COY'],['HQ2 FLY','FLY'],['HQ2 COY','COY'],
- ['HR2 FLY','FLY'],['HR2 COY','COY'],['PRODOTTO LENTO','Altre'],
+ ['HB2 FLY','HUB'],['HB2 COY','HUB'],['HP3 FLY','HUB'],['HP3 COY','HUB'],
+ ['HM4 FLY','HUB'],['HM4 COY','HUB'],['HQ2 FLY','HUB'],['HQ2 COY','HUB'],
+ ['HR2 FLY','HUB'],['HR2 COY','HUB'],['PRODOTTO LENTO','Altre'],
  ['HB AMAZON REVERSE','Reverse'],['HB REVERSE YOOX','Reverse'],['HP REV','Reverse'],['UCA SALERNO','Altre'],
  ['MY DA POTENZA','Altre'],['HM EURODIS','Altre'],['HP3','Altre'],['HW REVERSE ZALANDO','Reverse']
 ];

@@ -5,7 +5,7 @@ import './style.css';
 import { romeDate } from './date.js';
 const db=createClient(supabaseUrl,supabaseKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
 const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const groups=['Calabria','FLY','COY','Reverse','Altre'];
+const groups=['HUB','Calabria','Reverse','Altre'];
 let items=destinations,filter=null,signature='',syncing=false,displayDate=romeDate();
 const app=document.querySelector('#app');
 app.innerHTML=`<main class="shell"><header class="topbar"><button class="brand" id="home" aria-label="Schermata principale"><img class="brand-logo" src="/sda-poste-logo.svg" alt="SDA Poste Italiane"><h1>Scritte</h1></button><span class="live" role="status"><i></i> Live</span></header><nav class="filters" aria-label="Tipo di scritta">${groups.map(g=>`<button data-filter="${g}" class="filter" aria-pressed="false">${g}</button>`).join('')}</nav><div id="archive"></div></main>`;
@@ -14,6 +14,7 @@ function render(){
  if(!filter){document.querySelector('#archive').innerHTML=`<section class="home-screen" aria-label="Messaggio di Donato Langerame"><div class="home-message"><p class="message-main">CHE OGNI SINGOLA GOCCIA DI SUDORE DI OGNI MAGAZZINIERE POSSA LOGORARE I PACCHI DI VOI EBETI CONSUMATORI, UN GIORNO ANCH'IO ERO LI CON VOI.</p><p class="message-gift">VI LASCIO QUESTO ULTIMO REGALO</p><p class="message-signature">DONATO LANGERAME</p><div class="message-contact"><p>PER QUALSIASI AGGIUNTA CONTATTATEMI AL MIO NUMERO</p><a href="tel:+393716167880">3716167880</a></div></div></section>`;return;}
  document.querySelector('#archive').innerHTML=groups.filter(g=>g===filter).map(g=>{
   const entries=items.filter(i=>i.hub===g);
+  if(g==='HUB') entries.sort((a,b)=>a.label.split(' ')[0].localeCompare(b.label.split(' ')[0],'it',{numeric:true}) || (a.label.endsWith('FLY')?-1:1));
   if(!entries.length)return '';
   return `<section class="group group-${g.toLowerCase()}" aria-label="${g}"><div class="group-heading"><h2><i></i>${g}</h2><span>${entries.length}</span><div></div></div><div class="destinations">${entries.map(i=>`<a class="destination" href="${escape(i.pdf_path)}" target="_blank" rel="noopener" aria-label="Apri PDF ${escape(i.label)}"><span>${escape(i.label)}${i.id==='hw-reverse-zalando'?`<small class="daily-date">${romeDate()}</small>`:''}</span></a>`).join('')}</div></section>`;
  }).join('');
@@ -37,7 +38,7 @@ async function sync(){
    if(html&&currentScript&&!html.includes(currentScript)){location.replace(`/index.html?v=${version.version}${location.hash}`);return;}
   }
   if(!error&&data){
-   const valid=data.filter(i=>groups.includes(i.hub)&&typeof i.pdf_path==='string'&&(/^\/pdf\/[a-z0-9-]+\.pdf$/.test(i.pdf_path)||(i.id==='hw-reverse-zalando'&&i.pdf_path==='/print-zalando.html')));
+   const valid=data.map(i=>({...i,hub:['FLY','COY'].includes(i.hub)?'HUB':i.hub})).filter(i=>groups.includes(i.hub)&&typeof i.pdf_path==='string'&&(/^\/pdf\/[a-z0-9-]+\.pdf$/.test(i.pdf_path)||(i.id==='hw-reverse-zalando'&&i.pdf_path==='/print-zalando.html')));
    const nextSignature=JSON.stringify(valid);
    if(nextSignature!==signature){signature=nextSignature;items=valid;render();}
   }

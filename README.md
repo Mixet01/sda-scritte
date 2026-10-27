@@ -26,8 +26,10 @@ Aprire il riquadro, poi usare il comando Stampa del lettore PDF. Carta A4 vertic
 
 ## Interfaccia e aggiornamenti automatici
 
-Categorie Calabria, FLY, COY, Reverse e Altre con filtri. Nei riquadri compare soltanto la nomenclatura. La pagina controlla dati e versione ogni 30 secondi mentre è visibile e quando si torna alla scheda. Una nuova versione grafica viene caricata automaticamente dopo aver verificato che il nuovo HTML sia disponibile. Render deve inviare `Cache-Control: no-store`, configurato nel servizio e in `render.yaml`. Le pagine che erano già aperte prima dell’introduzione di questa funzione devono essere ricaricate una volta.
+Categorie HUB, Calabria, Reverse e Altre con filtri. Nei riquadri compare soltanto la nomenclatura. La pagina controlla dati e versione ogni 30 secondi mentre è visibile e quando si torna alla scheda. Una nuova versione grafica viene caricata automaticamente dopo aver verificato che il nuovo HTML sia disponibile. Render deve inviare `Cache-Control: no-store`, configurato nel servizio e in `render.yaml`. Le pagine che erano già aperte prima dell’introduzione di questa funzione devono essere ricaricate una volta.
 
 Logo SDA Poste Italiane: https://commons.wikimedia.org/wiki/File:SDA_poste_logo.svg (PD-textlogo). Schermata iniziale con logo di sfondo; selezionare una categoria per mostrare i PDF. Clic sul logo in alto per tornare alla schermata iniziale.
 
 HW REVERSE ZALANDO (Reverse) genera un nuovo PDF all’apertura con la data corrente in Europe/Rome, ripetuta sotto ciascuna delle due scritte. Nessuna automazione giornaliera o nuova pubblicazione richiesta. Il riquadro aggiorna la data alla mezzanotte italiana, entro il controllo di 30 secondi o tornando alla scheda. Un PDF già scaricato resta un documento statico: riaprirlo dal sito per ottenere la data del nuovo giorno.
+
+HUB unisce FLY e COY, ordinati per codice (HB2, HM4, HP3, HQ2, HR2), con FLY e COY affiancati per ogni codice.

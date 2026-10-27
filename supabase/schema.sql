@@ -39,3 +39,5 @@ delete from public.sda_public_signs where id in ('hp3-to-eurodis','hb-reverse-yh
 alter table public.sda_public_signs drop constraint if exists sda_public_signs_pdf_path_check;
 alter table public.sda_public_signs add constraint sda_public_signs_pdf_path_check check (pdf_path ~ '^/pdf/[a-z0-9-]+[.]pdf$' or (id='hw-reverse-zalando' and pdf_path='/print-zalando.html'));
 insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('hw-reverse-zalando','HW REVERSE ZALANDO','Reverse','/print-zalando.html',21) on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
+
+update public.sda_public_signs set hub='HUB' where hub in ('FLY','COY');
