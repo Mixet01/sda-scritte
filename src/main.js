@@ -32,7 +32,7 @@ async function sync(){
    // Reload only after the new entry point is available, avoiding stale-page loops.
    const html=await fetch(`/index.html?t=${Date.now()}`,{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>'');
    const currentScript=document.querySelector('script[type="module"][src]')?.getAttribute('src');
-   if(html&&currentScript&&!html.includes(currentScript)){location.replace(`${location.pathname}?v=${version.version}${location.hash}`);return;}
+   if(html&&currentScript&&!html.includes(currentScript)){location.replace(`/index.html?v=${version.version}${location.hash}`);return;}
   }
   if(!error&&data){
    const valid=data.filter(i=>groups.includes(i.hub)&&typeof i.pdf_path==='string'&&/^\/pdf\/[a-z0-9-]+\.pdf$/.test(i.pdf_path));
