@@ -21,7 +21,7 @@ insert into public.sda_public_signs (id,label,hub,pdf_path,sort_order) values
 ('hr2-coy','HR2 COY','COY','/pdf/hr2-coy.pdf',12),
 ('prodotto-lento','PRODOTTO LENTO','Altre','/pdf/prodotto-lento.pdf',13),
 ('hb-amazon-reverse','HB AMAZON REVERSE','Reverse','/pdf/hb-amazon-reverse.pdf',14),
-('hb-reverse-yhoox','HB REVERSE YHOOX','Reverse','/pdf/hb-reverse-yhoox.pdf',15),
+('hb-reverse-yoox','HB REVERSE YOOX','Reverse','/pdf/hb-reverse-yoox.pdf',15),
 ('hp-rev','HP REV','Reverse','/pdf/hp-rev.pdf',16),
 ('uca-salerno','UCA SALERNO','Altre','/pdf/uca-salerno.pdf',17)
 on conflict (id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
@@ -32,4 +32,6 @@ on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=exc
 
 delete from public.sda_public_signs where id='gtw-lonate';
 
-insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('hm-eurodis','HM EURODIS','Altre','/pdf/hm-eurodis.pdf',19),('hp3-to-eurodis','HP3 TO EURODIS','Altre','/pdf/hp3-to-eurodis.pdf',20) on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
+insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('hm-eurodis','HM EURODIS','Altre','/pdf/hm-eurodis.pdf',19),('hp3','HP3','Altre','/pdf/hp3.pdf',20) on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
+
+delete from public.sda_public_signs where id in ('hp3-to-eurodis','hb-reverse-yhoox');
