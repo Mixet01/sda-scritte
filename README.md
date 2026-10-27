@@ -23,3 +23,7 @@ Le modifiche a `src/destinations.js` richiedono una build per generare i PDF. Al
 ## Stampa
 
 Aprire il riquadro, poi usare il comando Stampa del lettore PDF. Carta A4 verticale, scala 100% o dimensioni effettive, una pagina per foglio. Per tutte le scritte vengono stampate due copie sullo stesso foglio.
+
+## Interfaccia e aggiornamenti automatici
+
+Categorie Calabria, FLY, COY, Reverse e Altre con filtri. Nei riquadri compare soltanto la nomenclatura. La pagina controlla dati e versione ogni 30 secondi mentre è visibile e quando si torna alla scheda. Una nuova versione grafica viene caricata automaticamente dopo aver verificato che il nuovo HTML sia disponibile. Render deve inviare `Cache-Control: no-store`, configurato nel servizio e in `render.yaml`. Le pagine che erano già aperte prima dell’introduzione di questa funzione devono essere ricaricate una volta.
