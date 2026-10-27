@@ -1,6 +1,6 @@
 # SDA Scritte
 
-Archivio pubblico senza credenziali, con 18 riquadri cliccabili e 18 PDF A4 separati. Ogni PDF contiene due copie della stessa scritta in Helvetica Bold, grandi e centrate, con una linea di taglio a metà foglio.
+Archivio pubblico senza credenziali, con 20 riquadri cliccabili e 20 PDF A4 separati. Ogni PDF contiene due copie della stessa scritta in Anton, carattere pesante e condensato, grandi e centrate, con una linea di taglio a metà foglio.
 
 ## Avvio
 
@@ -18,7 +18,7 @@ Le modifiche a `src/destinations.js` richiedono una build per generare i PDF. Al
 
 ## Verifiche
 
-`pnpm test` controlla corrispondenza delle 18 diciture, PDF distinti e dimensioni A4. `python scripts/verify-pdfs.py` (PyMuPDF e Pillow) verifica il testo due volte, grassetto, margini, dimensioni e genera una tavola di controllo in `test-results/`.
+`pnpm test` controlla corrispondenza delle 20 diciture, PDF distinti e dimensioni A4. `python scripts/verify-pdfs.py` (PyMuPDF e Pillow) verifica il testo due volte, grassetto, margini, dimensioni e genera una tavola di controllo in `test-results/`.
 
 ## Stampa
 

@@ -25,3 +25,8 @@ insert into public.sda_public_signs (id,label,hub,pdf_path,sort_order) values
 ('hp-rev','HP REV','Reverse','/pdf/hp-rev.pdf',16),
 ('uca-salerno','UCA SALERNO','Altre','/pdf/uca-salerno.pdf',17)
 on conflict (id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
+
+insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values
+('my-da-potenza','MY DA POTENZA','Altre','/pdf/my-da-potenza.pdf',18),
+('gtw-lonate','GTW LONATE','Altre','/pdf/gtw-lonate.pdf',19)
+on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
