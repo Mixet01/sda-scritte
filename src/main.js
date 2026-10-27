@@ -5,18 +5,20 @@ import './style.css';
 const db=createClient(supabaseUrl,supabaseKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
 const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const groups=['Calabria','FLY','COY','Reverse','Altre'];
-let items=destinations,filter='Tutte',signature='',syncing=false;
+let items=destinations,filter=null,signature='',syncing=false;
 const app=document.querySelector('#app');
-app.innerHTML=`<main class="shell"><header class="topbar"><div class="brand"><span class="brand-icon" aria-hidden="true">S<span>↗</span></span><h1>SDA <span>Scritte</span></h1></div><span class="live" role="status"><i></i> Live</span></header><nav class="filters" aria-label="Tipo di scritta">${['Tutte',...groups].map(g=>`<button data-filter="${g}" class="filter ${g==='Tutte'?'active':''}" aria-pressed="${g==='Tutte'}">${g}</button>`).join('')}</nav><div id="archive"></div></main>`;
+app.innerHTML=`<main class="shell"><header class="topbar"><button class="brand" id="home" aria-label="Schermata principale"><img class="brand-logo" src="/sda-poste-logo.svg" alt="SDA Poste Italiane"><h1>Scritte</h1></button><span class="live" role="status"><i></i> Live</span></header><nav class="filters" aria-label="Tipo di scritta">${groups.map(g=>`<button data-filter="${g}" class="filter" aria-pressed="false">${g}</button>`).join('')}</nav><div id="archive"></div></main>`;
 function render(){
  document.querySelectorAll('[data-filter]').forEach(b=>{b.classList.toggle('active',b.dataset.filter===filter);b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
- document.querySelector('#archive').innerHTML=groups.filter(g=>filter==='Tutte'||g===filter).map(g=>{
+ if(!filter){document.querySelector('#archive').innerHTML='<div class="home-screen" role="img" aria-label="SDA Poste Italiane"></div>';return;}
+ document.querySelector('#archive').innerHTML=groups.filter(g=>g===filter).map(g=>{
   const entries=items.filter(i=>i.hub===g);
   if(!entries.length)return '';
   return `<section class="group group-${g.toLowerCase()}" aria-label="${g}"><div class="group-heading"><h2><i></i>${g}</h2><span>${entries.length}</span><div></div></div><div class="destinations">${entries.map(i=>`<a class="destination" href="${escape(i.pdf_path)}" target="_blank" rel="noopener" aria-label="Apri PDF ${escape(i.label)}"><span>${escape(i.label)}</span></a>`).join('')}</div></section>`;
  }).join('');
 }
 app.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render();});
+document.querySelector('#home').onclick=()=>{filter=null;render();};
 render();
 async function sync(){
  if(syncing||document.visibilityState==='hidden'||!navigator.onLine)return;
