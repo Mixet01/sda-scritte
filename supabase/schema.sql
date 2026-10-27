@@ -31,3 +31,5 @@ insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values
 on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
 
 delete from public.sda_public_signs where id='gtw-lonate';
+
+insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('hm-eurodis','HM EURODIS','Altre','/pdf/hm-eurodis.pdf',19),('hp3-to-eurodis','HP3 TO EURODIS','Altre','/pdf/hp3-to-eurodis.pdf',20) on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;

@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw
 
 root=Path(__file__).resolve().parents[1]
 files=sorted((root/'public/pdf').glob('*.pdf'))
-assert len(files)==19, len(files)
+assert len(files)==21, len(files)
 thumbs=[]
 for file in files:
     pdf=fitz.open(file)
@@ -33,8 +33,8 @@ for file in files:
     tile.paste(image,((280-image.width)//2,10))
     ImageDraw.Draw(tile).text((12,375),expected,fill='#182e43')
     thumbs.append(tile)
-contact=Image.new('RGB',(280*5,395*4),'white')
+contact=Image.new('RGB',(280*5,395*((len(files)+4)//5)),'white')
 for index,tile in enumerate(thumbs): contact.paste(tile,((index%5)*280,(index//5)*395))
 (root/'test-results').mkdir(exist_ok=True)
 contact.save(root/'test-results/pdf-contact-sheet.png')
-print('PASS: 19 PDF, A4, una pagina, testo esatto due volte, carattere pesante >=100pt, nessuna scritta tagliata o sovrapposta.')
+print('PASS: 21 PDF, A4, una pagina, testo esatto due volte, carattere pesante >=100pt, nessuna scritta tagliata o sovrapposta.')
