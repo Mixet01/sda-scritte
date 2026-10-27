@@ -10,7 +10,7 @@ const app=document.querySelector('#app');
 app.innerHTML=`<main class="shell"><header class="topbar"><button class="brand" id="home" aria-label="Schermata principale"><img class="brand-logo" src="/sda-poste-logo.svg" alt="SDA Poste Italiane"><h1>Scritte</h1></button><span class="live" role="status"><i></i> Live</span></header><nav class="filters" aria-label="Tipo di scritta">${groups.map(g=>`<button data-filter="${g}" class="filter" aria-pressed="false">${g}</button>`).join('')}</nav><div id="archive"></div></main>`;
 function render(){
  document.querySelectorAll('[data-filter]').forEach(b=>{b.classList.toggle('active',b.dataset.filter===filter);b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
- if(!filter){document.querySelector('#archive').innerHTML='<div class="home-screen" role="img" aria-label="SDA Poste Italiane"></div>';return;}
+ if(!filter){document.querySelector('#archive').innerHTML=`<section class="home-screen" aria-label="Messaggio di Donato Langerame"><div class="home-message"><p class="message-main">CHE OGNI SINGOLA GOCCIA DI SUDORE DI OGNI MAGAZZINIERE POSSA LOGORARE I PACCHI DI VOI EBETI CONSUMATORI, UN GIORNO ANCH'IO ERO LI CON VOI.</p><p class="message-gift">VI LASCIO QUESTO ULTIMO REGALO</p><p class="message-signature">DONATO LANGERAME</p><div class="message-contact"><p>PER QUALSIASI AGGIUNTA CONTATTATEMI AL MIO NUMERO</p><a href="tel:+393716167880">3716167880</a></div></div></section>`;return;}
  document.querySelector('#archive').innerHTML=groups.filter(g=>g===filter).map(g=>{
   const entries=items.filter(i=>i.hub===g);
   if(!entries.length)return '';
