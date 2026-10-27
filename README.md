@@ -1,6 +1,6 @@
 # SDA Scritte
 
-Archivio pubblico senza credenziali, con 21 riquadri cliccabili e 21 PDF A4 separati. Ogni PDF contiene due copie della stessa scritta in Anton, carattere pesante e condensato, grandi e centrate, con una linea di taglio a met√† foglio.
+Archivio pubblico senza credenziali, con 22 riquadri cliccabili e PDF A4 separati. Ogni PDF contiene due copie della stessa scritta in Anton, carattere pesante e condensato, grandi e centrate, con una linea di taglio a met√† foglio.
 
 ## Avvio
 
@@ -18,7 +18,7 @@ Le modifiche a `src/destinations.js` richiedono una build per generare i PDF. Al
 
 ## Verifiche
 
-`pnpm test` controlla corrispondenza delle 21 diciture, PDF distinti e dimensioni A4. `python scripts/verify-pdfs.py` (PyMuPDF e Pillow) verifica il testo due volte, grassetto, margini, dimensioni e genera una tavola di controllo in `test-results/`.
+`pnpm test` controlla corrispondenza delle 22 diciture, PDF distinti e dimensioni A4. `python scripts/verify-pdfs.py` (PyMuPDF e Pillow) verifica il testo due volte, grassetto, margini, dimensioni e genera una tavola di controllo in `test-results/`.
 
 ## Stampa
 
@@ -29,3 +29,5 @@ Aprire il riquadro, poi usare il comando Stampa del lettore PDF. Carta A4 vertic
 Categorie Calabria, FLY, COY, Reverse e Altre con filtri. Nei riquadri compare soltanto la nomenclatura. La pagina controlla dati e versione ogni 30 secondi mentre Ë visibile e quando si torna alla scheda. Una nuova versione grafica viene caricata automaticamente dopo aver verificato che il nuovo HTML sia disponibile. Render deve inviare `Cache-Control: no-store`, configurato nel servizio e in `render.yaml`. Le pagine che erano gi‡ aperte prima dellíintroduzione di questa funzione devono essere ricaricate una volta.
 
 Logo SDA Poste Italiane: https://commons.wikimedia.org/wiki/File:SDA_poste_logo.svg (PD-textlogo). Schermata iniziale con logo di sfondo; selezionare una categoria per mostrare i PDF. Clic sul logo in alto per tornare alla schermata iniziale.
+
+HW REVERSE ZALANDO (Reverse) genera un nuovo PDF allíapertura con la data corrente in Europe/Rome, ripetuta sotto ciascuna delle due scritte. Nessuna automazione giornaliera o nuova pubblicazione richiesta. Il riquadro aggiorna la data alla mezzanotte italiana, entro il controllo di 30 secondi o tornando alla scheda. Un PDF gi‡ scaricato resta un documento statico: riaprirlo dal sito per ottenere la data del nuovo giorno.

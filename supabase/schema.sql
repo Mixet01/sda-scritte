@@ -35,3 +35,7 @@ delete from public.sda_public_signs where id='gtw-lonate';
 insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('hm-eurodis','HM EURODIS','Altre','/pdf/hm-eurodis.pdf',19),('hp3','HP3','Altre','/pdf/hp3.pdf',20) on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
 
 delete from public.sda_public_signs where id in ('hp3-to-eurodis','hb-reverse-yhoox');
+
+alter table public.sda_public_signs drop constraint if exists sda_public_signs_pdf_path_check;
+alter table public.sda_public_signs add constraint sda_public_signs_pdf_path_check check (pdf_path ~ '^/pdf/[a-z0-9-]+[.]pdf$' or (id='hw-reverse-zalando' and pdf_path='/print-zalando.html'));
+insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('hw-reverse-zalando','HW REVERSE ZALANDO','Reverse','/print-zalando.html',21) on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
