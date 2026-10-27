@@ -2,7 +2,7 @@ services:
   - type: web
     name: sda-scritte
     runtime: static
-    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build
+    buildCommand: pnpm install --frozen-lockfile && pnpm build
     staticPublishPath: ./dist
     headers:
       - path: /*

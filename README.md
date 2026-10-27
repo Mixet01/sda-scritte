@@ -8,7 +8,7 @@ Node.js 22 o successivo e pnpm 10.28.2. Eseguire `pnpm install`, `pnpm dev`. Per
 
 ## Render
 
-Creare un **Static Site** dal repository `Mixet01/sda-scritte`. Il file `render.yaml` configura build e cartella pubblica. Build: `corepack enable && pnpm install --frozen-lockfile && pnpm build`. Publish directory: `dist`. Nessuna chiave segreta da configurare.
+Creare un **Static Site** dal repository `Mixet01/sda-scritte`. Il file `render.yaml` configura build e cartella pubblica. Build: `pnpm install --frozen-lockfile && pnpm build`. Publish directory: `dist`. Nessuna chiave segreta da configurare.
 
 ## Supabase
 
