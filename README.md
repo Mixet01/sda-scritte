@@ -1,6 +1,6 @@
 # SDA Scritte
 
-Archivio pubblico senza credenziali, con 22 riquadri cliccabili e PDF A4 separati. Ogni PDF contiene due copie della stessa scritta in Anton, carattere pesante e condensato, grandi e centrate, con una linea di taglio a met√† foglio.
+Archivio pubblico senza credenziali, con 22 riquadri cliccabili e PDF A4 separati. Ogni PDF contiene due copie della stessa scritta in Helvetica Bold, carattere largo in grassetto, grandi e centrate, con una linea di taglio a met√† foglio.
 
 ## Avvio
 
@@ -33,3 +33,5 @@ Logo SDA Poste Italiane: https://commons.wikimedia.org/wiki/File:SDA_poste_logo.
 HW REVERSE ZALANDO (Reverse) genera un nuovo PDF allíapertura con la data corrente in Europe/Rome, ripetuta sotto ciascuna delle due scritte. Nessuna automazione giornaliera o nuova pubblicazione richiesta. Il riquadro aggiorna la data alla mezzanotte italiana, entro il controllo di 30 secondi o tornando alla scheda. Un PDF gi‡ scaricato resta un documento statico: riaprirlo dal sito per ottenere la data del nuovo giorno.
 
 HUB unisce FLY e COY, ordinati per codice (HB2, HM4, HP3, HQ2, HR2), con FLY e COY affiancati per ogni codice.
+
+Ogni parola della nomenclatura occupa una riga separata (esempio: HB / AMAZON / REVERSE), su entrambe le copie A4. Anche il PDF giornaliero Zalando usa il carattere largo e una parola per riga.
