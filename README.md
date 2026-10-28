@@ -35,3 +35,5 @@ HW REVERSE ZALANDO (Reverse) genera un nuovo PDF all’apertura con la data corren
 HUB unisce FLY e COY, ordinati per codice (HB2, HM4, HP3, HQ2, HR2), con FLY e COY affiancati per ogni codice.
 
 Ogni parola della nomenclatura occupa una riga separata (esempio: HB / AMAZON / REVERSE), su entrambe le copie A4. Anche il PDF giornaliero Zalando usa il carattere largo e una parola per riga.
+
+Etichetta Zalando aggiornata sulla foto di riferimento: logo, REVERSE, da Potenza, destino HUB PIACENZA (ZA) e data giornaliera; due etichette affiancate in una composizione orizzontale, ruotate fisicamente di 90 gradi in una pagina A4 verticale senza flag di rotazione. Stampare A4 verticale al 100%. Logo: https://commons.wikimedia.org/wiki/File:Zalando_Logo.png (PD-textlogo).
