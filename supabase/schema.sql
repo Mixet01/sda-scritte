@@ -57,3 +57,5 @@ update public.sda_public_signs set pdf_path='/print-banche.html' where id='fogli
 update public.sda_public_signs set pdf_path='/print-poste-lento.html' where id='poste-prodotto-lento';
 
 insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('prodotto-lento','PRODOTTO LENTO','Altre','/pdf/prodotto-lento.pdf',24) on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
+
+insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('potenza-x-roma1-banche','POTENZA X ROMA1 BANCHE','Banche','/pdf/potenza-x-roma1-banche.pdf',25) on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
