@@ -50,3 +50,8 @@ insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('f
 delete from public.sda_public_signs where id='prodotto-lento';
 
 insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('hr-da-trabalzare','HR DA TRABALZARE','Altre','/pdf/hr-da-trabalzare.pdf',23) on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
+
+alter table public.sda_public_signs drop constraint if exists sda_public_signs_pdf_path_check;
+alter table public.sda_public_signs add constraint sda_public_signs_pdf_path_check check (pdf_path ~ '^/pdf/[a-z0-9-]+[.]pdf$' or (id='hw-reverse-zalando' and pdf_path='/print-zalando.html') or (id='foglio-banche' and pdf_path='/print-banche.html') or (id='poste-prodotto-lento' and pdf_path='/print-poste-lento.html'));
+update public.sda_public_signs set pdf_path='/print-banche.html' where id='foglio-banche';
+update public.sda_public_signs set pdf_path='/print-poste-lento.html' where id='poste-prodotto-lento';

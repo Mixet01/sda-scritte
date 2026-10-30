@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { supabaseUrl, supabaseKey } from './config.js';
-import { destinations } from './destinations.js';
+import { destinations, dailyPdfPages } from './destinations.js';
 import './style.css';
 import { romeDate } from './date.js';
 const db=createClient(supabaseUrl,supabaseKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
@@ -15,7 +15,7 @@ function render(){
  document.querySelector('#archive').innerHTML=groups.filter(g=>g===filter).map(g=>{
   const entries=items.filter(i=>i.hub===g);
   if(g==='HUB') entries.sort((a,b)=>a.label.split(' ')[0].localeCompare(b.label.split(' ')[0],'it',{numeric:true}) || (a.label.endsWith('FLY')?-1:1));
-  return `<section class="group group-${g.toLowerCase()}" aria-label="${g}"><div class="group-heading"><h2><i></i>${g}</h2><span>${entries.length}</span><div></div></div><div class="destinations">${entries.map(i=>`<a class="destination" href="${escape(i.pdf_path)}" target="_blank" rel="noopener" aria-label="Apri PDF ${escape(i.label)}"><span>${escape(i.label)}${i.id==='hw-reverse-zalando'?`<small class="daily-date">${romeDate()}</small>`:''}</span></a>`).join('')}</div>${!entries.length?'<p class="empty-category">Nessuna scritta presente.</p>':''}</section>`;
+  return `<section class="group group-${g.toLowerCase()}" aria-label="${g}"><div class="group-heading"><h2><i></i>${g}</h2><span>${entries.length}</span><div></div></div><div class="destinations">${entries.map(i=>`<a class="destination" href="${escape(i.pdf_path)}" target="_blank" rel="noopener" aria-label="Apri PDF ${escape(i.label)}"><span>${escape(i.label)}${dailyPdfPages[i.id]?`<small class="daily-date">${romeDate()}</small>`:''}</span></a>`).join('')}</div>${!entries.length?'<p class="empty-category">Nessuna scritta presente.</p>':''}</section>`;
  }).join('');
 }
 app.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render();});
@@ -37,7 +37,7 @@ async function sync(){
    if(html&&currentScript&&!html.includes(currentScript)){location.replace(`/index.html?v=${version.version}${location.hash}`);return;}
   }
   if(!error&&data){
-   const valid=data.map(i=>({...i,hub:['FLY','COY'].includes(i.hub)?'HUB':i.hub})).filter(i=>groups.includes(i.hub)&&typeof i.pdf_path==='string'&&(/^\/pdf\/[a-z0-9-]+\.pdf$/.test(i.pdf_path)||(i.id==='hw-reverse-zalando'&&i.pdf_path==='/print-zalando.html')));
+   const valid=data.map(i=>({...i,hub:['FLY','COY'].includes(i.hub)?'HUB':i.hub})).filter(i=>groups.includes(i.hub)&&typeof i.pdf_path==='string'&&(/^\/pdf\/[a-z0-9-]+\.pdf$/.test(i.pdf_path)||dailyPdfPages[i.id]===i.pdf_path));
    const nextSignature=JSON.stringify(valid);
    if(nextSignature!==signature){signature=nextSignature;items=valid;render();}
   }

@@ -6,4 +6,5 @@ const entries=[
  ['HB AMAZON REVERSE','Reverse'],['HB REVERSE YOOX','Reverse'],['HP REV','Reverse'],['UCA SALERNO','Altre'],
  ['MY DA POTENZA','Internazionale'],['HM EURODIS','Internazionale'],['HP3 TO EURODIS','Internazionale'],['HW REVERSE ZALANDO','Reverse'],['FOGLIO BANCHE','Banche'],['HR DA TRABALZARE','Altre']
 ];
-export const destinations=entries.map(([label,hub],index)=>{const id=label.toLowerCase().replace(/\s+/g,'-');return{id,label,hub,pdf_path:id==='hw-reverse-zalando'?'/print-zalando.html':`/pdf/${id}.pdf`,sort_order:index};});
+export const dailyPdfPages={'hw-reverse-zalando':'/print-zalando.html','foglio-banche':'/print-banche.html','poste-prodotto-lento':'/print-poste-lento.html'};
+export const destinations=entries.map(([label,hub],index)=>{const id=label.toLowerCase().replace(/\s+/g,'-');return{id,label,hub,pdf_path:dailyPdfPages[id]||`/pdf/${id}.pdf`,sort_order:index};});

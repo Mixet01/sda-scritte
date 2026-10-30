@@ -41,3 +41,5 @@ Etichetta Zalando aggiornata sulla foto di riferimento: logo, REVERSE, da Potenz
 Internazionale contiene MY DA POTENZA, HM EURODIS e HP3 TO EURODIS; Banche è disponibile come sezione vuota in attesa delle sue scritte.
 
 FOGLIO BANCHE: PDF di quattro pagine A4, ricreato dalle foto Foglio1-4, dati trascritti in data/foglio-banche.json. Colonne DATA, ISTITUTO, LOCALITA, INDIRIZZO, BOLGETTA e ASSEGNI. POSTE PRODOTTO LENTO sostituisce il precedente PRODOTTO LENTO: modulo KANBAN AVVIAMENTO PACCHI ricreato dalla foto con due copie su A4, data e hub di destinazione vuoti. Entrambi vengono generati da scripts/generate-special-pdfs.mjs durante la build.
+
+Data automatica anche per Foglio banche e Poste prodotto lento: i riquadri aprono print-banche.html e print-poste-lento.html, che generano il documento al momento con la data Europe/Rome. Banche riporta la data su tutte e quattro le pagine; Poste in entrambi i moduli. I PDF statici in public/pdf restano modelli vergini per verifica e archivio; dal sito si usano le pagine di generazione giornaliera. Un PDF già salvato non cambia da solo: per la data del nuovo giorno riaprirlo dal sito.
