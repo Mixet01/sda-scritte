@@ -5,7 +5,7 @@ import './style.css';
 import { romeDate } from './date.js';
 const db=createClient(supabaseUrl,supabaseKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
 const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const groups=['HUB','Calabria','Reverse','Altre'];
+const groups=['HUB','Calabria','Reverse','Banche','Internazionale','Altre'];
 let items=destinations,filter=null,signature='',syncing=false,displayDate=romeDate();
 const app=document.querySelector('#app');
 app.innerHTML=`<main class="shell"><header class="topbar"><button class="brand" id="home" aria-label="Schermata principale"><img class="brand-logo" src="/sda-poste-logo.svg" alt="SDA Poste Italiane"><h1>Scritte</h1></button><span class="live" role="status"><i></i> Live</span></header><nav class="filters" aria-label="Tipo di scritta">${groups.map(g=>`<button data-filter="${g}" class="filter" aria-pressed="false">${g}</button>`).join('')}</nav><div id="archive"></div></main>`;
@@ -15,8 +15,7 @@ function render(){
  document.querySelector('#archive').innerHTML=groups.filter(g=>g===filter).map(g=>{
   const entries=items.filter(i=>i.hub===g);
   if(g==='HUB') entries.sort((a,b)=>a.label.split(' ')[0].localeCompare(b.label.split(' ')[0],'it',{numeric:true}) || (a.label.endsWith('FLY')?-1:1));
-  if(!entries.length)return '';
-  return `<section class="group group-${g.toLowerCase()}" aria-label="${g}"><div class="group-heading"><h2><i></i>${g}</h2><span>${entries.length}</span><div></div></div><div class="destinations">${entries.map(i=>`<a class="destination" href="${escape(i.pdf_path)}" target="_blank" rel="noopener" aria-label="Apri PDF ${escape(i.label)}"><span>${escape(i.label)}${i.id==='hw-reverse-zalando'?`<small class="daily-date">${romeDate()}</small>`:''}</span></a>`).join('')}</div></section>`;
+  return `<section class="group group-${g.toLowerCase()}" aria-label="${g}"><div class="group-heading"><h2><i></i>${g}</h2><span>${entries.length}</span><div></div></div><div class="destinations">${entries.map(i=>`<a class="destination" href="${escape(i.pdf_path)}" target="_blank" rel="noopener" aria-label="Apri PDF ${escape(i.label)}"><span>${escape(i.label)}${i.id==='hw-reverse-zalando'?`<small class="daily-date">${romeDate()}</small>`:''}</span></a>`).join('')}</div>${!entries.length?'<p class="empty-category">Nessuna scritta presente.</p>':''}</section>`;
  }).join('');
 }
 app.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render();});

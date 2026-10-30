@@ -26,7 +26,7 @@ Aprire il riquadro, poi usare il comando Stampa del lettore PDF. Carta A4 vertic
 
 ## Interfaccia e aggiornamenti automatici
 
-Categorie HUB, Calabria, Reverse e Altre con filtri. Nei riquadri compare soltanto la nomenclatura. La pagina controlla dati e versione ogni 30 secondi mentre è visibile e quando si torna alla scheda. Una nuova versione grafica viene caricata automaticamente dopo aver verificato che il nuovo HTML sia disponibile. Render deve inviare `Cache-Control: no-store`, configurato nel servizio e in `render.yaml`. Le pagine che erano già aperte prima dell’introduzione di questa funzione devono essere ricaricate una volta.
+Categorie HUB, Calabria, Reverse, Banche, Internazionale e Altre con filtri. Nei riquadri compare soltanto la nomenclatura. La pagina controlla dati e versione ogni 30 secondi mentre è visibile e quando si torna alla scheda. Una nuova versione grafica viene caricata automaticamente dopo aver verificato che il nuovo HTML sia disponibile. Render deve inviare `Cache-Control: no-store`, configurato nel servizio e in `render.yaml`. Le pagine che erano già aperte prima dell’introduzione di questa funzione devono essere ricaricate una volta.
 
 Logo SDA Poste Italiane: https://commons.wikimedia.org/wiki/File:SDA_poste_logo.svg (PD-textlogo). Schermata iniziale con logo di sfondo; selezionare una categoria per mostrare i PDF. Clic sul logo in alto per tornare alla schermata iniziale.
 
@@ -37,3 +37,5 @@ HUB unisce FLY e COY, ordinati per codice (HB2, HM4, HP3, HQ2, HR2), con FLY e C
 Ogni parola della nomenclatura occupa una riga separata (esempio: HB / AMAZON / REVERSE), su entrambe le copie A4. Anche il PDF giornaliero Zalando usa il carattere largo e una parola per riga.
 
 Etichetta Zalando aggiornata sulla foto di riferimento: logo, REVERSE, da Potenza, destino HUB PIACENZA (ZA) e data giornaliera; due etichette affiancate in una composizione orizzontale, ruotate fisicamente di 90 gradi in una pagina A4 verticale senza flag di rotazione. Stampare A4 verticale al 100%. Logo: https://commons.wikimedia.org/wiki/File:Zalando_Logo.png (PD-textlogo).
+
+Internazionale contiene MY DA POTENZA, HM EURODIS e HP3 TO EURODIS; Banche è disponibile come sezione vuota in attesa delle sue scritte.

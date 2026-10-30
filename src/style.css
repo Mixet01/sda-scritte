@@ -9,3 +9,5 @@
 
 .group-hub .destinations{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:1000px){.group-hub .destinations{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .home-message{max-width:880px}.message-main{font-size:clamp(19px,1.9vw,25px);line-height:1.65;font-weight:650;letter-spacing:-.25px}.message-signature{margin-top:30px}@media(max-width:640px){.message-main{font-size:19px;line-height:1.65}.message-signature{margin-top:26px}}
+
+.group-banche{--accent:#9475be;--tint:#f5effc}.group-internazionale{--accent:#cc9446;--tint:#fff6e9}.group-internazionale .destinations{grid-template-columns:repeat(3,minmax(0,1fr))}.empty-category{margin:0;padding:32px 20px;border:1px dashed #d9dfeb;border-radius:15px;text-align:center;color:#8090a0;font-size:13px;background:#ffffff80}@media(max-width:640px){.group-internazionale .destinations{grid-template-columns:repeat(2,minmax(0,1fr))}}

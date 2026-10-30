@@ -15,5 +15,9 @@ test('Ogni destinazione ha un PDF A4 distinto di una pagina',async()=>{
  }
 });
 test('Le diciture corrispondono alle 22 scritte richieste',()=>{
- assert.deepEqual(destinations.map(i=>i.label),['COSENZA','CATANZARO','REGGIO CALABRIA','HB2 FLY','HB2 COY','HP3 FLY','HP3 COY','HM4 FLY','HM4 COY','HQ2 FLY','HQ2 COY','HR2 FLY','HR2 COY','PRODOTTO LENTO','HB AMAZON REVERSE','HB REVERSE YOOX','HP REV','UCA SALERNO','MY DA POTENZA','HM EURODIS','HP3','HW REVERSE ZALANDO']);
+ assert.deepEqual(destinations.map(i=>i.label),['COSENZA','CATANZARO','REGGIO CALABRIA','HB2 FLY','HB2 COY','HP3 FLY','HP3 COY','HM4 FLY','HM4 COY','HQ2 FLY','HQ2 COY','HR2 FLY','HR2 COY','PRODOTTO LENTO','HB AMAZON REVERSE','HB REVERSE YOOX','HP REV','UCA SALERNO','MY DA POTENZA','HM EURODIS','HP3 TO EURODIS','HW REVERSE ZALANDO']);
+});
+
+test('Internazionale contiene le tre destinazioni richieste',()=>{
+ assert.deepEqual(destinations.filter(i=>i.hub==='Internazionale').map(i=>i.label),['MY DA POTENZA','HM EURODIS','HP3 TO EURODIS']);
 });
