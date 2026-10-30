@@ -45,3 +45,6 @@ update public.sda_public_signs set hub='HUB' where hub in ('FLY','COY');
 update public.sda_public_signs set hub='Internazionale' where id in ('my-da-potenza','hm-eurodis');
 insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('hp3-to-eurodis','HP3 TO EURODIS','Internazionale','/pdf/hp3-to-eurodis.pdf',20) on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
 delete from public.sda_public_signs where id='hp3';
+
+insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('foglio-banche','FOGLIO BANCHE','Banche','/pdf/foglio-banche.pdf',22),('poste-prodotto-lento','POSTE PRODOTTO LENTO','Altre','/pdf/poste-prodotto-lento.pdf',13) on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
+delete from public.sda_public_signs where id='prodotto-lento';

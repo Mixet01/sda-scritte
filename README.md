@@ -1,6 +1,6 @@
 # SDA Scritte
 
-Archivio pubblico senza credenziali, con 22 riquadri cliccabili e PDF A4 separati. Ogni PDF contiene due copie della stessa scritta in Helvetica Bold, carattere largo in grassetto, grandi e centrate, con una linea di taglio a metà foglio.
+Archivio pubblico senza credenziali, con 23 riquadri cliccabili e PDF A4 separati. Ogni PDF contiene due copie della stessa scritta in Helvetica Bold, carattere largo in grassetto, grandi e centrate, con una linea di taglio a metà foglio.
 
 ## Avvio
 
@@ -18,7 +18,7 @@ Le modifiche a `src/destinations.js` richiedono una build per generare i PDF. Al
 
 ## Verifiche
 
-`pnpm test` controlla corrispondenza delle 22 diciture, PDF distinti e dimensioni A4. `python scripts/verify-pdfs.py` (PyMuPDF e Pillow) verifica il testo due volte, grassetto, margini, dimensioni e genera una tavola di controllo in `test-results/`.
+`pnpm test` controlla corrispondenza delle 23 diciture, PDF distinti e dimensioni A4. `python scripts/verify-pdfs.py` (PyMuPDF e Pillow) verifica il testo due volte, grassetto, margini, dimensioni e genera una tavola di controllo in `test-results/`.
 
 ## Stampa
 
@@ -39,3 +39,5 @@ Ogni parola della nomenclatura occupa una riga separata (esempio: HB / AMAZON / 
 Etichetta Zalando aggiornata sulla foto di riferimento: logo, REVERSE, da Potenza, destino HUB PIACENZA (ZA) e data giornaliera; due etichette affiancate in una composizione orizzontale, ruotate fisicamente di 90 gradi in una pagina A4 verticale senza flag di rotazione. Stampare A4 verticale al 100%. Logo: https://commons.wikimedia.org/wiki/File:Zalando_Logo.png (PD-textlogo).
 
 Internazionale contiene MY DA POTENZA, HM EURODIS e HP3 TO EURODIS; Banche � disponibile come sezione vuota in attesa delle sue scritte.
+
+FOGLIO BANCHE: PDF di quattro pagine A4, ricreato dalle foto Foglio1-4, dati trascritti in data/foglio-banche.json. Colonne DATA, ISTITUTO, LOCALITA, INDIRIZZO, BOLGETTA e ASSEGNI. POSTE PRODOTTO LENTO sostituisce il precedente PRODOTTO LENTO: modulo KANBAN AVVIAMENTO PACCHI ricreato dalla foto con due copie su A4, data e hub di destinazione vuoti. Entrambi vengono generati da scripts/generate-special-pdfs.mjs durante la build.

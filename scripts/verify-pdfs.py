@@ -3,8 +3,8 @@ import pymupdf as fitz
 from PIL import Image, ImageDraw
 
 root=Path(__file__).resolve().parents[1]
-files=sorted((root/'public/pdf').glob('*.pdf'))
-assert len(files)==21, len(files)
+files=sorted(p for p in (root/'public/pdf').glob('*.pdf') if p.stem not in ['foglio-banche','poste-prodotto-lento'])
+assert len(files)==20, len(files)
 thumbs=[]
 for file in files:
     pdf=fitz.open(file)
@@ -39,4 +39,4 @@ contact=Image.new('RGB',(280*5,395*((len(files)+4)//5)),'white')
 for index,tile in enumerate(thumbs): contact.paste(tile,((index%5)*280,(index//5)*395))
 (root/'test-results').mkdir(exist_ok=True)
 contact.save(root/'test-results/pdf-contact-sheet.png')
-print('PASS: 21 PDF A4, due copie, una parola per riga, Helvetica Bold largo, margini verificati.')
+print('PASS: 20 PDF A4, due copie, una parola per riga, Helvetica Bold largo, margini verificati.')
