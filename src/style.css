@@ -93,3 +93,31 @@ button:focus-visible, a:focus-visible { outline: 3px solid #0a62ed; outline-offs
   .destination, .filter { transition: none; }
   .destination:hover { transform: none; }
 }
+/* Halloween: purely decorative, never included in the printable PDF documents. */
+:root { --yellow: #ff942b; }
+.sidebar { display: flex; flex-direction: column; position: sticky; isolation: isolate; }
+.sidebar::before { content: ''; position: absolute; inset: 0 auto auto 0; width: 95px; height: 95px; background: url(/halloween-web.svg) center / contain no-repeat; transform: rotate(-90deg); filter: brightness(0) invert(1); opacity: .32; z-index: -1; pointer-events: none; }
+.sidebar .topbar, .sidebar .filters { flex-shrink: 0; }
+.filter.active { background: #ff942b; color: #082651; }
+.halloween-sidebar-decor { display: flex; justify-content: center; margin-top: auto; padding-top: 30px; pointer-events: none; }
+.halloween-sidebar-decor img { width: 132px; height: auto; filter: drop-shadow(0 8px 6px #002c5930); }
+.workspace::before { content: ''; position: absolute; top: 0; right: 0; width: 145px; height: 145px; background: url(/halloween-web.svg) center / contain no-repeat; opacity: .2; pointer-events: none; }
+.workspace::after { content: ''; position: absolute; top: 124px; right: 7px; width: 23px; height: 67px; background: url(/halloween-spider.svg) center / contain no-repeat; opacity: .75; pointer-events: none; }
+.group-heading h2::after { content: ''; display: inline-block; vertical-align: middle; width: 41px; height: 41px; margin-left: 15px; background: url(/halloween-pumpkin.svg) center / contain no-repeat; }
+.destination::after { content: ''; position: absolute; top: 0; right: 0; width: 53px; height: 53px; background: url(/halloween-web.svg) center / contain no-repeat; opacity: .2; pointer-events: none; }
+.destination span { position: relative; z-index: 1; }
+.workspace { padding-bottom: 65px; background-image: url(/halloween-bat.svg), url(/halloween-bat.svg); background-repeat: no-repeat; background-size: 37px 21px, 25px 15px; background-position: right 22px bottom 16px, right 67px bottom 11px; }
+@media (max-width: 760px) {
+  .sidebar { position: static; display: block; }
+  .sidebar::before { width: 65px; height: 65px; }
+  .halloween-sidebar-decor { position: absolute; top: 20px; right: 19px; padding: 0; margin: 0; }
+  .halloween-sidebar-decor img { width: 45px; }
+  .workspace::before { width: 80px; height: 80px; opacity: .16; }
+  .workspace::after { width: 15px; height: 44px; right: 1px; top: 90px; opacity: .5; }
+  .group-heading h2::after { width: 28px; height: 28px; margin-left: 9px; }
+  .destination::after { width: 34px; height: 34px; opacity: .17; }
+}
+@media print {
+  .halloween-sidebar-decor, .sidebar::before, .workspace::before, .workspace::after, .destination::after, .group-heading h2::after { display: none; }
+  .workspace { background-image: none; }
+}

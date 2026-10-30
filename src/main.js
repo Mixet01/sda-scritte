@@ -21,6 +21,12 @@ function render(){
 app.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render();});
 document.querySelector('#home').onclick=()=>{filter=null;render();};
 render();
+// Seasonal decoration belongs to the website only; printable documents are unchanged.
+const seasonalDecor = document.createElement('div');
+seasonalDecor.className = 'halloween-sidebar-decor';
+seasonalDecor.setAttribute('aria-hidden', 'true');
+seasonalDecor.innerHTML = '<img src="/halloween-pumpkin.svg" alt="" width="132" height="124">';
+document.querySelector('.sidebar').append(seasonalDecor);
 async function sync(){
  const today=romeDate();if(today!==displayDate){displayDate=today;render();}
  if(syncing||document.visibilityState==='hidden'||!navigator.onLine)return;
