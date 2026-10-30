@@ -3,7 +3,7 @@ import { romeDate } from './date.js';
 
 (async () => {
 try {
-  const logoResponse = await fetch('/zalando-logo.png');
+  const logoResponse = await fetch(`/zalando-logo-flat.png?v=${__APP_VERSION__}`, { cache: 'no-store' });
   if (!logoResponse.ok) throw new Error('Logo non disponibile.');
   const logoBytes = await logoResponse.arrayBuffer();
   const date = romeDate();

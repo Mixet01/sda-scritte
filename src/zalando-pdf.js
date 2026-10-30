@@ -19,7 +19,8 @@ export async function createZalandoPdf({ date, logoBytes }) {
       if (underline) page.drawLine({ start: { x: x - 3, y: y - 7 }, end: { x: x + textWidth + 3, y: y - 7 }, thickness: 2, color: black });
     };
     const logoWidth = panel - 62;
-    page.drawImage(logo, { x: left + 31, y: 498, width: logoWidth, height: logoWidth * logo.height / logo.width });
+    // Account for the flat logo's white lower margin, keeping its visible baseline at 498pt.
+    page.drawImage(logo, { x: left + 31, y: 498 - logoWidth * 166 / 2172, width: logoWidth, height: logoWidth * logo.height / logo.width });
     centerText('REVERSE', 425, 54);
     page.drawText('da:   Potenza', { x: left + 34, y: 365, size: 22, font: regular, color: black });
     page.drawText('destino:', { x: left + 27, y: 300, size: 29, font: regular, color: black });

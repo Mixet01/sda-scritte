@@ -10,7 +10,7 @@ test('La data segue la mezzanotte italiana, anche con ora legale',()=>{
   assert.equal(romeDate(new Date('2026-07-15T22:00:00Z')),'16/07/2026');
 });
 test('Ogni apertura genera il PDF con la data richiesta, senza una data fissata nella build',async()=>{
-  const logoBytes=await readFile(new URL('../public/zalando-logo.png',import.meta.url));
+  const logoBytes=await readFile(new URL('../public/zalando-logo-flat.png',import.meta.url));
   for(const date of ['27/10/2026','28/10/2026']){
     const pdf=await PDFDocument.load(await createZalandoPdf({date,logoBytes}));
     assert.equal(pdf.getPageCount(),1);
