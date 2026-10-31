@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { supabaseUrl, supabaseKey } from './config.js';
-import { destinations, dailyPdfPages } from './destinations.js';
+import { destinations, dailyPdfPages, specialPdfPages } from './destinations.js';
 import './style.css';
 import { romeDate } from './date.js';
 const db=createClient(supabaseUrl,supabaseKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
@@ -43,7 +43,7 @@ async function sync(){
    if(html&&currentScript&&!html.includes(currentScript)){location.replace(`/index.html?v=${version.version}${location.hash}`);return;}
   }
   if(!error&&data){
-   const valid=data.map(i=>({...i,hub:['FLY','COY'].includes(i.hub)?'HUB':i.hub})).filter(i=>groups.includes(i.hub)&&typeof i.pdf_path==='string'&&(/^\/pdf\/[a-z0-9-]+\.pdf$/.test(i.pdf_path)||dailyPdfPages[i.id]===i.pdf_path));
+   const valid=data.map(i=>({...i,hub:['FLY','COY'].includes(i.hub)?'HUB':i.hub})).filter(i=>groups.includes(i.hub)&&typeof i.pdf_path==='string'&&(/^\/pdf\/[a-z0-9-]+\.pdf$/.test(i.pdf_path)||dailyPdfPages[i.id]===i.pdf_path||specialPdfPages[i.id]===i.pdf_path));
    const nextSignature=JSON.stringify(valid);
    if(nextSignature!==signature){signature=nextSignature;items=valid;render();}
   }

@@ -59,3 +59,24 @@ update public.sda_public_signs set pdf_path='/print-poste-lento.html' where id='
 insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('prodotto-lento','PRODOTTO LENTO','Altre','/pdf/prodotto-lento.pdf',24) on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
 
 insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values ('potenza-x-roma1-banche','POTENZA X ROMA1 BANCHE','Banche','/pdf/potenza-x-roma1-banche.pdf',25) on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;
+
+insert into public.sda_public_signs(id,label,hub,pdf_path,sort_order) values
+('banca-pop-pugl-borsa-gialla-bari','BANCA POP PUGL (BORSA GIALLA) BARI','Banche','/pdf/banca-pop-pugl-borsa-gialla-bari.pdf',26),
+('b-p-m-casellario-milano','B.P.M. CASELLARIO MILANO','Banche','/pdf/b-p-m-casellario-milano.pdf',27),
+('vittoria-assicurazioni-milano-b','VITTORIA ASSICURAZIONI MILANO B.','Banche','/pdf/vittoria-assicurazioni-milano-b.pdf',28),
+('bcc-solution-sinergia','BCC SOLUTION SINERGIA','Banche','/pdf/bcc-solution-sinergia.pdf',29),
+('allianz-per-milano','ALLIANZ PER MILANO','Banche','/pdf/allianz-per-milano.pdf',30),
+('fideuram-x-foggia','FIDEURAM X FOGGIA','Banche','/pdf/fideuram-x-foggia.pdf',31),
+('banca-pop-pugl-borsa-verde-bologna','BANCA POP PUGL BORSA VERDE BOLOGNA','Banche','/pdf/banca-pop-pugl-borsa-verde-bologna.pdf',32),
+('banca-pop-pugl-borsa-blu-lecce','BANCA POP PUGL BORSA BLU LECCE','Banche','/pdf/banca-pop-pugl-borsa-blu-lecce.pdf',33),
+('widiba-casellario-lecce','WIDIBA CASELLARIO LECCE','Banche','/pdf/widiba-casellario-lecce.pdf',34),
+('mps-borsa-gialla-per-sda-roma','MPS BORSA GIALLA PER SDA ROMA','Banche','/pdf/mps-borsa-gialla-per-sda-roma.pdf',35),
+('mps-borsa-amaranto-per-casellario-roma','MPS BORSA AMARANTO PER CASELLARIO ROMA','Banche','/pdf/mps-borsa-amaranto-per-casellario-roma.pdf',36),
+('caricese-bologna','CARICESE BOLOGNA','Banche','/pdf/caricese-bologna.pdf',37),
+('siaed-roma-via-della-maglianella-65','SIAED ROMA VIA DELLA MAGLIANELLA 65','Banche','/pdf/siaed-roma-via-della-maglianella-65.pdf',38),
+('b-n-l-casellario-roma','B.N.L. CASELLARIO ROMA','Banche','/pdf/b-n-l-casellario-roma.pdf',39),
+('agenzia-entrate-casellario-ba','AGENZIA ENTRATE CASELLARIO BA','Banche','/pdf/agenzia-entrate-casellario-ba.pdf',40),
+('telecom-telepost-spa-milano','TELECOM TELEPOST SPA MILANO','Banche','/pdf/telecom-telepost-spa-milano.pdf',41),
+('bdm-banca-spa','BDM BANCA SPA','Banche','/pdf/bdm-banca-spa.pdf',42),
+('banca-pop-puglia-e-basilicata','BANCA POP PUGLIA E BASILICATA','Banche','/pdf/banca-pop-puglia-e-basilicata.pdf',43)
+on conflict(id) do update set label=excluded.label,hub=excluded.hub,pdf_path=excluded.pdf_path,sort_order=excluded.sort_order;

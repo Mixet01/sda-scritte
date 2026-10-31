@@ -1,3 +1,4 @@
+import {bankSigns} from './bank-signs.js';
 const entries=[
  ['COSENZA','Calabria'],['CATANZARO','Calabria'],['REGGIO CALABRIA','Calabria'],
  ['HB2 FLY','HUB'],['HB2 COY','HUB'],['HP3 FLY','HUB'],['HP3 COY','HUB'],
@@ -6,5 +7,7 @@ const entries=[
  ['HB AMAZON REVERSE','Reverse'],['HB REVERSE YOOX','Reverse'],['HP REV','Reverse'],['UCA SALERNO','Altre'],
  ['MY DA POTENZA','Internazionale'],['HM EURODIS','Internazionale'],['HP3 TO EURODIS','Internazionale'],['HW REVERSE ZALANDO','Reverse'],['FOGLIO BANCHE','Banche'],['HR DA TRABALZARE','Altre'],['PRODOTTO LENTO','Altre'],['POTENZA X ROMA1 BANCHE','Banche']
 ];
-export const dailyPdfPages={'hw-reverse-zalando':'/print-zalando.html','foglio-banche':'/print-banche.html','poste-prodotto-lento':'/print-poste-lento.html'};
-export const destinations=entries.map(([label,hub],index)=>{const id=label.toLowerCase().replace(/\s+/g,'-');return{id,label,hub,pdf_path:dailyPdfPages[id]||`/pdf/${id}.pdf`,sort_order:index};});
+entries.push(...bankSigns.map(label=>[label,'Banche']));
+export const dailyPdfPages={'hw-reverse-zalando':'/print-zalando.html'};
+export const specialPdfPages={'foglio-banche':'/print-banche.html','poste-prodotto-lento':'/print-poste-lento.html'};
+export const destinations=entries.map(([label,hub],index)=>{const id=label.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');return{id,label,hub,pdf_path:dailyPdfPages[id]||specialPdfPages[id]||`/pdf/${id}.pdf`,sort_order:index};});
