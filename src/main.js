@@ -2,15 +2,21 @@ import { createClient } from '@supabase/supabase-js';
 import { supabaseUrl, supabaseKey } from './config.js';
 import { destinations, dailyPdfPages, specialPdfPages } from './destinations.js';
 import './style.css';
+import { showMixet, opensMixetSetup } from './mixet.js';
 import { romeDate } from './date.js';
 const db=createClient(supabaseUrl,supabaseKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
 const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const groups=['HUB','Calabria','Reverse','Banche','Internazionale','Altre'];
-let items=destinations,filter=null,signature='',syncing=false,displayDate=romeDate();
+let items=destinations,filter=opensMixetSetup?'Mixet':null,signature='',syncing=false,displayDate=romeDate();
 const app=document.querySelector('#app');
-app.innerHTML=`<div class="shell"><aside class="sidebar"><header class="topbar"><button class="brand" id="home" aria-label="Schermata principale"><span class="brand-mark"><img class="brand-logo" src="/sda-poste-logo.svg" alt="SDA Poste Italiane"></span><h1>Scritte</h1></button></header><nav class="filters" aria-label="Tipo di scritta">${groups.map(g=>`<button data-filter="${g}" class="filter" aria-pressed="false">${g}</button>`).join('')}</nav></aside><main class="workspace"><span class="live" role="status"><i></i> Live</span><div id="archive"></div></main></div>`;
+app.innerHTML=`<div class="shell"><aside class="sidebar"><header class="topbar"><button class="brand" id="home" aria-label="Schermata principale"><span class="brand-mark"><img class="brand-logo" src="/sda-poste-logo.svg" alt="SDA Poste Italiane"></span><h1>Scritte</h1></button></header><nav class="filters" aria-label="Tipo di scritta">${[...groups,'Mixet'].map(g=>`<button data-filter="${g}" class="filter" aria-pressed="false">${g}</button>`).join('')}</nav></aside><main class="workspace"><span class="live" role="status"><i></i> Live</span><div id="archive"></div></main></div>`;
 function render(){
  document.querySelectorAll('[data-filter]').forEach(b=>{b.classList.toggle('active',b.dataset.filter===filter);b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
+ if(filter==='Mixet'){
+  const archive=document.querySelector('#archive');
+  if(!archive.querySelector('.mixet-panel')) showMixet(archive);
+  return;
+ }
  if(!filter){document.querySelector('#archive').innerHTML=`<section class="home-screen" aria-label="Messaggio di Donato Langerame"><div class="home-message"><p class="message-main">«Passo dall’altra parte della barricata e vado a consegnarli, questi maledetti pacchi. Ma la mia pelle e il mio sudore restano qui dentro con voi: possa ogni goccia versata tra questi scaffali logorare le scatole di chi compra senza sapere la fatica che c'è dietro. Rispetto vero per chi mandava e continua a mandare avanti la baracca ogni giorno. Ero lì a spaccarmi la schiena con voi e non lo dimenticherò mai. Ci vediamo alle ribalte!»</p><p class="message-signature">DONATO LANGERAME</p><div class="message-contact"><p>PER QUALSIASI AGGIUNTA CONTATTATEMI AL MIO NUMERO</p><a href="tel:+393716167880">3716167880</a></div></div></section>`;return;}
  document.querySelector('#archive').innerHTML=groups.filter(g=>g===filter).map(g=>{
   const entries=items.filter(i=>i.hub===g);

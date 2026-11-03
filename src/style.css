@@ -121,3 +121,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid #0a62ed; outline-offs
   .halloween-sidebar-decor, .sidebar::before, .workspace::before, .workspace::after, .destination::after, .group-heading h2::after { display: none; }
   .workspace { background-image: none; }
 }
+.mixet-panel { max-width: 680px; padding: 24px; background: white; border: 1px solid #a8bdd6; border-radius: 8px; overflow-wrap: anywhere; }
+.mixet-panel h2 { margin-bottom: 24px; }
+.mixet-panel form { display: grid; gap: 12px; margin-bottom: 20px; }
+.mixet-panel input, .mixet-panel button { font: inherit; min-width: 0; padding: 10px; }
+.mixet-panel button { cursor: pointer; color: #071e50; background: #eef2f6; border: 1px solid #a8bdd6; border-radius: 6px; }
+.mixet-panel li { margin: 8px 0; }
