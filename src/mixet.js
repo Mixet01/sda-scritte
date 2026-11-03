@@ -66,7 +66,8 @@ async function showFiles(content,status) {
       for (const file of data) {
         const row = document.createElement('li');
         const button = document.createElement('button');
-        const name = decodeURIComponent(file.name.slice(37));
+        const encodedName = file.name.slice(37).replaceAll('-', '+').replaceAll('_', '/');
+        const name = new TextDecoder().decode(Uint8Array.from(atob(encodedName), char => char.charCodeAt(0)));
         button.textContent = name;
         button.onclick = async () => {
           button.disabled = true;
@@ -111,7 +112,8 @@ async function showFiles(content,status) {
     button.disabled = true;
     status.textContent = 'Caricamento in corso…';
     try {
-      const name = crypto.randomUUID() + '-' + encodeURIComponent(file.name);
+      const encodedName = btoa(String.fromCharCode(...new TextEncoder().encode(file.name)));
+      const name = crypto.randomUUID() + '-' + encodedName.replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'');
       const {error} = await files.upload(name,file,{upsert:false,contentType:'application/octet-stream'});
       if (error) throw new Error('Caricamento non riuscito.');
       form.reset();
