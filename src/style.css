@@ -127,3 +127,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #0a62ed; outline-offs
 .mixet-panel input, .mixet-panel button { font: inherit; min-width: 0; padding: 10px; }
 .mixet-panel button { cursor: pointer; color: #071e50; background: #eef2f6; border: 1px solid #a8bdd6; border-radius: 6px; }
 .mixet-panel li { margin: 8px 0; }
+.mixet-panel.mixet-open { max-width: none; padding: 0; border: 0; background: transparent; }
+.mixet-open .destination { cursor: pointer; }
+.mixet-open .mixet-lock { margin-top: 18px; }
+.mixet-open .destination span { font-size: clamp(19px, 2.3vw, 32px); }

@@ -9,6 +9,7 @@ const files = client.storage.from('sda-mixet-private');
 let setupToken = new URLSearchParams(location.hash.slice(1)).get('mixet-setup');
 if (setupToken) history.replaceState(null,'',location.pathname + location.search);
 let unlocked = false;
+const manageFiles = new URLSearchParams(location.search).get('mixet') === 'gestione';
 
 export function showMixet(root) {
   root.innerHTML = '<section class="mixet-panel"><h2>Mixet</h2><div class="mixet-content"></div><p class="mixet-status" role="status"></p></section>';
@@ -53,41 +54,56 @@ export function showMixet(root) {
 }
 
 async function showFiles(content,status) {
-  content.innerHTML = '<form><label for="mixet-file">Carica un file privato</label><input id="mixet-file" type="file" required><button type="submit">Carica</button></form><ul></ul><button type="button" class="mixet-lock">Blocca</button>';
+  content.closest('.mixet-panel').classList.add('mixet-open');
+  const upload = '<form><label for="mixet-file">Carica o sostituisci un file</label><input id="mixet-file" type="file" required><button type="submit">Carica</button></form>';
+  content.innerHTML = (manageFiles ? upload : '') + '<div class="destinations"></div><button type="button" class="mixet-lock">Blocca</button>';
   status.textContent = '';
-  const list = content.querySelector('ul');
+  const list = content.querySelector('.destinations');
   const form = content.querySelector('form');
   const lock = content.querySelector('.mixet-lock');
+  const keysByName = new Map();
   const refresh = async () => {
     const fragment = document.createDocumentFragment();
+    keysByName.clear();
     for (let offset = 0;; offset += 100) {
       const {data,error} = await files.list('',{limit:100,offset,sortBy:{column:'name',order:'asc'}});
       if (error) throw new Error('Impossibile leggere i file.');
       for (const file of data) {
-        const row = document.createElement('li');
         const button = document.createElement('button');
         const encodedName = file.name.slice(37).replaceAll('-', '+').replaceAll('_', '/');
         const name = new TextDecoder().decode(Uint8Array.from(atob(encodedName), char => char.charCodeAt(0)));
-        button.textContent = name;
+        keysByName.set(name,file.name);
+        button.type = 'button';
+        button.className = 'destination';
+        const label = document.createElement('span');
+        label.textContent = name.replace(/\.pdf$/i,'');
+        button.append(label);
         button.onclick = async () => {
+          const isPdf = /\.pdf$/i.test(name);
+          const preview = isPdf ? window.open('about:blank','_blank') : null;
+          if (preview) preview.opener = null;
           button.disabled = true;
           try {
             const {data,error} = await files.download(file.name);
             if (error) throw error;
-            const url = URL.createObjectURL(data);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = name;
-            link.click();
+            const blob = isPdf ? new Blob([data],{type:'application/pdf'}) : data;
+            const url = URL.createObjectURL(blob);
+            if (preview) preview.location.replace(url);
+            else {
+              const link = document.createElement('a');
+              link.href = url;
+              link.download = name;
+              link.click();
+            }
             setTimeout(() => URL.revokeObjectURL(url),60000);
           } catch {
-            status.textContent = 'Impossibile scaricare il file.';
+            preview?.close();
+            status.textContent = 'Impossibile aprire il file.';
           } finally {
             button.disabled = false;
           }
         };
-        row.append(button);
-        fragment.append(row);
+        fragment.append(button);
       }
       if (data.length < 100) break;
     }
@@ -101,7 +117,7 @@ async function showFiles(content,status) {
     await client.auth.signOut({scope:'local'});
     if (root?.contains(content)) showMixet(root);
   };
-  form.onsubmit = async event => {
+  if (form) form.onsubmit = async event => {
     event.preventDefault();
     const file = form.querySelector('input').files[0];
     if (!file || file.size > 20 * 1024 * 1024) {
@@ -114,7 +130,9 @@ async function showFiles(content,status) {
     try {
       const encodedName = btoa(String.fromCharCode(...new TextEncoder().encode(file.name)));
       const name = crypto.randomUUID() + '-' + encodedName.replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'');
-      const {error} = await files.upload(name,file,{upsert:false,contentType:'application/octet-stream'});
+      const existing = keysByName.get(file.name);
+      const options = {contentType:'application/octet-stream',cacheControl:'0'};
+      const {error} = existing ? await files.update(existing,file,options) : await files.upload(name,file,options);
       if (error) throw new Error('Caricamento non riuscito.');
       form.reset();
       status.textContent = 'File caricato.';
@@ -128,4 +146,4 @@ async function showFiles(content,status) {
   try { await refresh(); } catch (error) { status.textContent = error.message; }
 }
 
-export const opensMixetSetup = Boolean(setupToken);
+export const opensMixetSetup = Boolean(setupToken) || manageFiles;
